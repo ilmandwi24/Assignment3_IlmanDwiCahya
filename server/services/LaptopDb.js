@@ -1,4 +1,5 @@
-const MySQL = require('promise-mysql2');
+// eslint-disable-next-line import/no-extraneous-dependencies
+const MySQL = require('mysql2/promise');
 const CommonHelper = require('../helpers/CommonHelper');
 
 const connectionPool = MySQL.createPool({
@@ -12,6 +13,27 @@ const connectionPool = MySQL.createPool({
 
 const laptopTable = process.env.LAPTOP_TABLE || 'laptop';
 
+const executeQuery = async (query, values = []) => {
+  let connection = null;
+  try {
+    connection = await connectionPool.getConnection();
+    const timeStart = process.hrtime();
+    const [result] = await connection.query(query, values);
+    const timeDiff = process.hrtime(timeStart);
+    const timeTaken = Math.round((timeDiff[0] * 1e9 + timeDiff[1]) / 1e6);
+    CommonHelper.log(['Database', 'Operation', 'INFO'], {
+      message: { query, timeTaken }
+    });
+    if (connection) connection.release();
+    return result;
+  } catch (error) {
+    CommonHelper.log(['Database', 'Operation', 'ERROR'], {
+      message: `${error}`
+    });
+    if (connection) connection.release();
+    throw error;
+  }
+};
 // const getListPhonebook = async () => {
 //   let connection = null;
 //   try {
@@ -42,150 +64,32 @@ const laptopTable = process.env.LAPTOP_TABLE || 'laptop';
 //   }
 // };
 const getListLaptop = async () => {
-  let connection = null;
-  try {
-    const timeStart = process.hrtime();
-
-    connection = connectionPool && (await connectionPool.getConnection());
-    const [rawResult] = await connection.query(`SELECT * FROM ${laptopTable}`);
-    const result = Object.values(JSON.parse(JSON.stringify(rawResult)));
-
-    // Log Transaction
-    const timeDiff = process.hrtime(timeStart);
-    const timeTaken = Math.round((timeDiff[0] * 1e9 + timeDiff[1]) / 1e6);
-    CommonHelper.log(['Database', 'getListLaptop', 'INFO'], {
-      message: { timeTaken },
-      result
-    });
-
-    return result;
-  } catch (error) {
-    CommonHelper.log(['Database', 'getListPhonebook', 'ERROR'], {
-      message: `${error}`
-    });
-    throw error;
-  } finally {
-    if (connection) {
-      connection.release();
-    }
-  }
+  const query = `SELECT * FROM ${laptopTable}`;
+  const rawResult = await executeQuery(query);
+  return Object.values(JSON.parse(JSON.stringify(rawResult)));
 };
 
 const addLaptop = async (nama,brand,processor,ram,vga,harga) => {
-    let connection = null;
-    try {
-        const timeStart = process.hrtime();
-
-        connection = connectionPool && (await connectionPool.getConnection());
-        const query = `INSERT INTO ${laptopTable} (nama, brand, processor, ram,vga,harga) VALUES (?, ?, ?, ?,?,?)`;
-        const values = [nama, brand, processor, ram,vga,harga];
-        await connection.query(query, values);
-
-        // Log Transaction
-        const timeDiff = process.hrtime(timeStart);
-        const timeTaken = Math.round((timeDiff[0] * 1e9 + timeDiff[1]) / 1e6);
-        CommonHelper.log(['Database', 'addLaptop', 'INFO'], {
-            message: { timeTaken }
-        });
-    } catch (error) {
-        CommonHelper.log(['Database', 'addLaptop', 'ERROR'], {
-            message: `${error}`
-        });
-        throw error;
-    } finally {
-        if (connection) {
-            connection.release();
-        }
-    }
+    
+  const query = `INSERT INTO ${laptopTable} (nama, brand, processor, ram,vga,harga) VALUES (?, ?, ?, ?,?,?)`;
+  const values = [nama, brand, processor, ram,vga,harga];
+  await executeQuery(query, values);
 };
 
 const editLaptop = async (id, nama,brand,processor,ram,vga,harga) => {
-  let connection = null;
-//   console.log(id)
-  try {
-    const timeStart = process.hrtime();
-
-    connection = connectionPool && (await connectionPool.getConnection());
-    const query = `UPDATE ${laptopTable} SET nama = ?, brand = ?, processor = ?, ram = ?, vga = ?, harga = ? WHERE id = ?`;
-    const values = [nama,brand,processor,ram,vga,harga,Number(id)];
-    const [result] = await connection.query(query, values);
-
-    // Log Transaction
-    const timeDiff = process.hrtime(timeStart);
-    const timeTaken = Math.round((timeDiff[0] * 1e9 + timeDiff[1]) / 1e6);
-    CommonHelper.log(['Database', 'editLaptop', 'INFO'], {
-      message: { timeTaken }
-    });
-    // console.log("---- ", typeof id)
-    return result?.affectedRows > 0;
-  } catch (error) {
-    CommonHelper.log(['Database', 'editLaptop', 'ERROR'], {
-      message: `${error}`
-    });
-    throw error;
-  } finally {
-    if (connection) {
-      connection.release();
-    }
-  }
+  
+  const query = `UPDATE ${laptopTable} SET nama = ?, brand = ?, processor = ?, ram = ?, vga = ?, harga = ? WHERE id = ?`;
+  const values = [nama,brand,processor,ram,vga,harga,Number(id)];
+  const result = await executeQuery(query, values);
+  return result?.affectedRows > 0;
 };
 
 const deleteLaptop = async (id) => {
-  let connection = null;
-  try {
-    const timeStart = process.hrtime();
-
-    connection = connectionPool && (await connectionPool.getConnection());
-    const query = `DELETE FROM ${laptopTable} WHERE id = ?`;
-    const values = [id];
-    const [result] = await connection.query(query, values);
-
-    // Log Transaction
-    const timeDiff = process.hrtime(timeStart);
-    const timeTaken = Math.round((timeDiff[0] * 1e9 + timeDiff[1]) / 1e6);
-    CommonHelper.log(['Database', 'deleteLaptop', 'INFO'], {
-      message: { timeTaken }
-    });
-    return result?.affectedRows > 0;
-  } catch (error) {
-    CommonHelper.log(['Database', 'Delete Laptop', 'ERROR'], {
-      message: `${error}`
-    });
-    throw error;
-  } finally {
-    if (connection) {
-      connection.release();
-    }
-  }
+  const query = `DELETE FROM ${laptopTable} WHERE id = ?`;
+  const values = [id];
+  const result = await executeQuery(query, values);
+  return result?.affectedRows > 0;
 };
-// const deletePhonebook = async (id) => {
-//   let connection = null;
-//   try {
-//     const timeStart = process.hrtime();
-
-//     connection = connectionPool && (await connectionPool.getConnection());
-//     const query = `DELETE FROM ${phoneBookTable} WHERE id = ?`;
-//     const values = [id];
-//     const [result] = await connection.query(query, values);
-
-//     // Log Transaction
-//     const timeDiff = process.hrtime(timeStart);
-//     const timeTaken = Math.round((timeDiff[0] * 1e9 + timeDiff[1]) / 1e6);
-//     CommonHelper.log(['Database', 'getListPhonebook', 'INFO'], {
-//       message: { timeTaken }
-//     });
-//     return result?.affectedRows > 0;
-//   } catch (error) {
-//     CommonHelper.log(['Database', 'getListPhonebook', 'ERROR'], {
-//       message: `${error}`
-//     });
-//     throw error;
-//   } finally {
-//     if (connection) {
-//       connection.release();
-//     }
-//   }
-// };
 
 module.exports = {
     // getListPhonebook,

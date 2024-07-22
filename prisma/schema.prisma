@@ -8,20 +8,11 @@ datasource db {
 }
 
 model laptop {
-  id        Int     @id
+  id        Int     @id @default(autoincrement())
   nama      String? @db.VarChar(100)
-  id_brand  Int?
+  brand     String? @db.VarChar(100)
   processor String? @db.VarChar(100)
   ram       Int?
   vga       String? @db.VarChar(100)
   harga     Float?
-  brand     brand?  @relation(fields: [id_brand], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "laptop_ibfk_1")
-
-  @@index([id_brand], map: "id_merek")
-}
-
-model brand {
-  id     Int      @id
-  nama   String?  @db.VarChar(100)
-  laptop laptop[]
 }

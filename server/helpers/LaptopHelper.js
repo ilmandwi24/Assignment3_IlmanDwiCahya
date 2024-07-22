@@ -1,9 +1,9 @@
 const Boom = require('boom');
 
 const CommonHelper = require('./CommonHelper');
-const Database = require('../services/Database');
-const Prisma = require('../services/Prisma');
+
 const LaptopDb = require('../services/LaptopDb');
+const LaptopPrisma = require('../services/LaptopPrisma');
 
 // const getAllList = async () => {
 //   try {
@@ -22,15 +22,7 @@ const LaptopDb = require('../services/LaptopDb');
 // };
 
 
-const addPhonebook = async (req) => {
-  try {
-    await Database.addPhonebook(req.body.name, req.body.number);
-    return `Added '${req.body.number}' as '${req.body.name}' to phonebook`;
-  } catch (error) {
-    CommonHelper.log(['PhoneBook Helper', 'addPhonebook', 'ERROR'], { message: `${error}` });
-    throw CommonHelper.errorResponse(error);
-  }
-};
+
 
 const getAllList = async () => {
   try {
@@ -58,7 +50,6 @@ const addLaptop = async (req) => {
       req.body.harga);
     return `Added '${req.body.nama}' to laptop`;
   } catch (error) {
-    console.log(error);
     CommonHelper.log(['Laptop Helper', 'addLaptop', 'ERROR'], { message: `${error}` });
     throw CommonHelper.errorResponse(error);
   }
@@ -78,7 +69,6 @@ const editLaptop = async (req) => {
     }
     return `Edited '${req.body.nama}' to laptop`;
   } catch (error) {
-    console.log(error)
     CommonHelper.log(['Laptop Helper', 'editLaptop', 'ERROR'], { message: `${error}` });
     throw CommonHelper.errorResponse(error);
   }
@@ -111,7 +101,7 @@ const deleteLaptop = async (req) => {
 
 const getAllListV2 = async () => {
   try {
-    const data = await Prisma.getListPhonebook();
+    const data = await LaptopPrisma.getListLaptop();
     if (data.length === 0) {
       return Boom.notFound('Phonebook not found');
     }
@@ -125,51 +115,60 @@ const getAllListV2 = async () => {
   }
 };
 
-const addPhonebookV2 = async (req) => {
+const addLaptopV2 = async (req) => {
   try {
-    await Prisma.addPhonebook(req.body.name, req.body.number);
-    return `Added '${req.body.number}' as '${req.body.name}' to phonebook`;
+    await LaptopPrisma.addLaptop(req.body.nama, 
+      req.body.brand, 
+      req.body.processor,
+      req.body.ram,
+      req.body.vga,
+      req.body.harga);
+    return `Added '${req.body.nama}' to laptop`;
   } catch (error) {
-    CommonHelper.log(['PhoneBook Helper', 'addPhonebook', 'ERROR'], { message: `${error}` });
+    CommonHelper.log(['Laptop Helper', 'addPhonebook', 'ERROR'], { message: `${error}` });
     throw CommonHelper.errorResponse(error);
   }
 };
 
-const editPhonebookV2 = async (req) => {
+const editLaptopV2 = async (req) => {
   try {
-    const editAction = await Prisma.editPhonebook(req.params.id, req.body.name, req.body.number);
+    const editAction = await LaptopPrisma.editLaptop(req.params.id, req.body.nama, 
+      req.body.brand, 
+      req.body.processor,
+      req.body.ram,
+      req.body.vga,
+      req.body.harga);
     if (!editAction) {
-      return Boom.notFound(`Phonebook with id ${req.params.id} not found `);
+      return Boom.notFound(`Laptop with id ${req.params.id} not found `);
     }
-    return `Edited '${req.body.number}' as '${req.body.name}' to phonebook`;
+    return `Edited '${req.body.nama}' to phonebook`;
   } catch (error) {
-    CommonHelper.log(['PhoneBook Helper', 'editPhonebook', 'ERROR'], { message: `${error}` });
+    CommonHelper.log(['Laptop Helper', 'editLaptop', 'ERROR'], { message: `${error}` });
     throw CommonHelper.errorResponse(error);
   }
 };
 
-const deletePhonebookV2 = async (req) => {
+const deleteLaptopV2 = async (req) => {
   try {
-    const deleteAction = await Prisma.deletePhonebook(req.params.id);
+    const deleteAction = await LaptopPrisma.deleteLaptop(req.params.id);
     if (!deleteAction) {
-      return Boom.notFound(`Phonebook with id ${req.params.id} not found `);
+      return Boom.notFound(`Laptop with id ${req.params.id} not found `);
     }
     return `Delete id ${req.params.id} successfully`;
   } catch (error) {
-    CommonHelper.log(['PhoneBook Helper', 'deletePhonebook', 'ERROR'], { message: `${error}` });
+    CommonHelper.log(['Laptop Helper', 'deletePhonebook', 'ERROR'], { message: `${error}` });
     throw CommonHelper.errorResponse(error);
   }
 };
 
 module.exports = {
   getAllList,
-  addPhonebook,
   editLaptop,
   // deletePhonebook,
   deleteLaptop,
   getAllListV2,
-  addPhonebookV2,
-  editPhonebookV2,
-  deletePhonebookV2,
+  addLaptopV2,
+  editLaptopV2,
+  deleteLaptopV2,
   addLaptop
 };

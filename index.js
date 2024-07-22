@@ -9,9 +9,7 @@ const port = process.env.PORT || 8080;
 
 // Import Route
 const anime = require('./server/api/anime');
-const phonebook = require('./server/api/phonebook');
-const phonebookV2 = require('./server/api/phonebookV2');
-const laptop = require('./server/api/laptopdb');
+const laptop = require('./server/api/laptop');
 
 // Middleware
 dotenv.config();
@@ -36,9 +34,8 @@ app.use((req, res, next) => {
 
 // Route middlewares
 app.use('/api/v1/anime', anime);
-app.use('/api/v1/phonebook', phonebook);
-app.use('/api/v2/phonebook', phonebookV2);
-app.use('/api/v1/laptop', laptop);
+
+app.use('/api', laptop);
 
 app.get('/sys/ping', (req, res) => {
   req.startTime = process.hrtime();
