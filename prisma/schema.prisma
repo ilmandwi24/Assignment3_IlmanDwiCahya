@@ -7,10 +7,21 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model phonebook {
-  id     Int    @id @default(autoincrement())
-  name   String @db.VarChar(255)
-  number String @unique(map: "number") @db.VarChar(255)
+model laptop {
+  id        Int     @id
+  nama      String? @db.VarChar(100)
+  id_brand  Int?
+  processor String? @db.VarChar(100)
+  ram       Int?
+  vga       String? @db.VarChar(100)
+  harga     Float?
+  brand     brand?  @relation(fields: [id_brand], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "laptop_ibfk_1")
 
-  @@index([number], map: "number_2")
+  @@index([id_brand], map: "id_merek")
+}
+
+model brand {
+  id     Int      @id
+  nama   String?  @db.VarChar(100)
+  laptop laptop[]
 }

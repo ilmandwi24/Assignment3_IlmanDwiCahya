@@ -3,6 +3,7 @@ const Boom = require('boom');
 const CommonHelper = require('./CommonHelper');
 const Database = require('../services/Database');
 const Prisma = require('../services/Prisma');
+const LaptopDb = require('../services/LaptopDb');
 
 const getAllList = async () => {
   try {
@@ -26,6 +27,16 @@ const addPhonebook = async (req) => {
     return `Added '${req.body.number}' as '${req.body.name}' to phonebook`;
   } catch (error) {
     CommonHelper.log(['PhoneBook Helper', 'addPhonebook', 'ERROR'], { message: `${error}` });
+    throw CommonHelper.errorResponse(error);
+  }
+};
+
+const addBrand = async (req) => {
+  try {
+    await LaptopDb.addMerek(req.body.name);
+    return `Added '${req.body.name}' to merek`;
+  } catch (error) {
+    CommonHelper.log(['Laptop Helper', 'addBrand', 'ERROR'], { message: `${error}` });
     throw CommonHelper.errorResponse(error);
   }
 };
@@ -116,5 +127,6 @@ module.exports = {
   getAllListV2,
   addPhonebookV2,
   editPhonebookV2,
-  deletePhonebookV2
+  deletePhonebookV2,
+  addBrand
 };
