@@ -5,22 +5,6 @@ const CommonHelper = require('./CommonHelper');
 const LaptopDb = require('../services/LaptopDb');
 const LaptopPrisma = require('../services/LaptopPrisma');
 
-// const getAllList = async () => {
-//   try {
-//     const data = await Database.getListPhonebook();
-//     if (data.length === 0) {
-//       return Boom.notFound('Phonebook not found');
-//     }
-//     return {
-//       count: data.length,
-//       list: data
-//     };
-//   } catch (error) {
-//     CommonHelper.log(['PhoneBook Helper', 'getAllList', 'ERROR'], { message: `${error}` });
-//     throw CommonHelper.errorResponse(error);
-//   }
-// };
-
 
 
 
@@ -86,18 +70,7 @@ const deleteLaptop = async (req) => {
     throw CommonHelper.errorResponse(error);
   }
 };
-// const deletePhonebook = async (req) => {
-//   try {
-//     const deleteAction = await Database.deletePhonebook(req.params.id);
-//     if (!deleteAction) {
-//       return Boom.notFound(`Phonebook with id ${req.params.id} not found `);
-//     }
-//     return `Delete id ${req.params.id} successfully`;
-//   } catch (error) {
-//     CommonHelper.log(['PhoneBook Helper', 'deletePhonebook', 'ERROR'], { message: `${error}` });
-//     throw CommonHelper.errorResponse(error);
-//   }
-// };
+
 
 const getAllListV2 = async () => {
   try {
@@ -164,7 +137,6 @@ const deleteLaptopV2 = async (req) => {
 module.exports = {
   getAllList,
   editLaptop,
-  // deletePhonebook,
   deleteLaptop,
   getAllListV2,
   addLaptopV2,

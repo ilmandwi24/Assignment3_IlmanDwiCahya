@@ -1,7 +1,5 @@
-// const MySQL = require('mysql2/promise');
 // eslint-disable-next-line import/no-extraneous-dependencies
 const MySQL = require('mysql2/promise');
-// const { getListPhonebook, addPhonebook, editPhonebook, deletePhonebook } = require('../../../server/services/Database');
 const { getListLaptop, addLaptop, editLaptop, deleteLaptop } = require('../../../server/services/LaptopDb');
 
 jest.mock('mysql2/promise', () => {
