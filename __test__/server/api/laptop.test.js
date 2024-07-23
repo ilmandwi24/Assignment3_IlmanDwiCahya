@@ -5,13 +5,6 @@ const TestHelper = require('../../../server/helpers/TestHelper');
 const laptop = require('../../../server/api/laptop');
 const LaptopDb = require('../../../server/services/LaptopDb');
 const LaptopPrisma = require('../../../server/services/LaptopPrisma');
-// const Prisma = require('../../../server/services/Prisma');
-// const Redis = require('../../../server/services/Redis');
-
-// jest.mock('../../../server/services/Redis', () => ({
-//   getKey: jest.fn(),
-//   setWithExpire: jest.fn()
-// }));
 
 let server;
 describe('Laptop', () => {
@@ -27,41 +20,6 @@ describe('Laptop', () => {
     jest.clearAllMocks();
   });
 
-  describe('API v1 Anime', () => {
-    // describe('GET /v1/anime/recomendation', () => {
-    //   it('should return 200 and get anime list from fetch', async () => {
-    //     const mockAnimeList = {
-    //       pagination: {
-    //         last_visible_page: 20,
-    //         has_next_page: true
-    //       },
-    //       data: []
-    //     };
-    //     Redis.getKey.mockResolvedValue(null);
-    //     Redis.setWithExpire.mockResolvedValue(null);
-    //     jest.spyOn(global, 'fetch').mockResolvedValue({
-    //       json: jest.fn().mockResolvedValue(mockAnimeList)
-    //     });
-
-    //     const response = await Request(server).get('/api/sample/v1/anime/recomendation');
-    //     expect(response.status).toBe(200);
-    //   });
-
-    //   it('should return 200 and get anime list from redis', async () => {
-    //     const mockAnimeList = '{"pagination":{"last_visible_page":20,"has_next_page":true},"data":[]}';
-    //     Redis.getKey.mockResolvedValue(mockAnimeList);
-    //     const response = await Request(server).get('/api/sample/v1/anime/recomendation');
-    //     expect(response.status).toBe(200);
-    //   });
-    //   it('should return 500 on error whet fetch anime list', async () => {
-    //     Redis.getKey.mockResolvedValue(null);
-    //     Redis.setWithExpire.mockResolvedValue(null);
-    //     jest.spyOn(global, 'fetch').mockRejectedValue(new Error('Internal Server Error'));
-    //     const response = await Request(server).get('/api/sample/v1/anime/recomendation');
-    //     expect(response.status).toBe(500);
-    //   });
-    // });
-  });
 
   describe('API V1 Query Database', () => {
     describe('GET /v1/laptop', () => {
