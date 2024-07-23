@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "cf101cdf-058e-49e9-b7a6-7ae431ff9bd5",
+		"_postman_id": "0a1544cb-acb6-4f35-9f47-04e4f183292c",
 		"name": "Laptop Inventory",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "36792217"
@@ -36,21 +36,9 @@
 		},
 		{
 			"name": "Dev - List Laptop",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
 			"request": {
 				"method": "GET",
 				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"nama\": \"Asus\",\r\n    \"brand\": \"Asus\",\r\n    \"processor\": \"Ryzen 5\",\r\n    \"ram\": \"8\",\r\n    \"vga\": \"NVIDIA\",\r\n    \"harga\": \"10.000.000\"\r\n\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
 				"url": {
 					"raw": "{{developer}}/api/v1/laptop",
 					"host": [
@@ -99,15 +87,6 @@
 			"request": {
 				"method": "DELETE",
 				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"nama\": \"Asus\",\r\n    \"brand\": \"Asus\",\r\n    \"processor\": \"Ryzen 5\",\r\n    \"ram\": 8,\r\n    \"vga\": \"NVIDIA\",\r\n    \"harga\": 5000000\r\n\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
 				"url": {
 					"raw": "{{developer}}/api/v1/laptop/5",
 					"host": [
@@ -153,21 +132,9 @@
 		},
 		{
 			"name": "Dev - List Laptop (Prisma)",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
 			"request": {
 				"method": "GET",
 				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"nama\": \"Asus\",\r\n    \"brand\": \"Asus\",\r\n    \"processor\": \"Ryzen 5\",\r\n    \"ram\": \"8\",\r\n    \"vga\": \"NVIDIA\",\r\n    \"harga\": \"10.000.000\"\r\n\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
 				"url": {
 					"raw": "{{developer}}/api/v2/laptop",
 					"host": [
@@ -216,15 +183,6 @@
 			"request": {
 				"method": "DELETE",
 				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"nama\": \"Asus\",\r\n    \"brand\": \"Asus\",\r\n    \"processor\": \"Ryzen 5\",\r\n    \"ram\": 8,\r\n    \"vga\": \"NVIDIA\",\r\n    \"harga\": 5000\r\n\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
 				"url": {
 					"raw": "{{developer}}/api/v2/laptop/4",
 					"host": [
@@ -270,21 +228,9 @@
 		},
 		{
 			"name": "List Laptop",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
 			"request": {
 				"method": "GET",
 				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"nama\": \"Asus\",\r\n    \"brand\": \"Asus\",\r\n    \"processor\": \"Ryzen 5\",\r\n    \"ram\": \"8\",\r\n    \"vga\": \"NVIDIA\",\r\n    \"harga\": \"10.000.000\"\r\n\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
 				"url": {
 					"raw": "{{production}}/api/v1/laptop",
 					"host": [
@@ -333,15 +279,6 @@
 			"request": {
 				"method": "DELETE",
 				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"nama\": \"Asus\",\r\n    \"brand\": \"Asus\",\r\n    \"processor\": \"Ryzen 5\",\r\n    \"ram\": 8,\r\n    \"vga\": \"NVIDIA\",\r\n    \"harga\": 5000\r\n\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
 				"url": {
 					"raw": "{{production}}/api/v1/laptop/1",
 					"host": [
@@ -387,21 +324,9 @@
 		},
 		{
 			"name": "List Laptop (Prisma)",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
 			"request": {
 				"method": "GET",
 				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"nama\": \"Asus\",\r\n    \"brand\": \"Asus\",\r\n    \"processor\": \"Ryzen 5\",\r\n    \"ram\": \"8\",\r\n    \"vga\": \"NVIDIA\",\r\n    \"harga\": \"10.000.000\"\r\n\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
 				"url": {
 					"raw": "{{production}}/api/v2/laptop",
 					"host": [
@@ -450,15 +375,6 @@
 			"request": {
 				"method": "DELETE",
 				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"nama\": \"Asus\",\r\n    \"brand\": \"Asus\",\r\n    \"processor\": \"Ryzen 5\",\r\n    \"ram\": 8,\r\n    \"vga\": \"NVIDIA\",\r\n    \"harga\": 5000\r\n\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
 				"url": {
 					"raw": "{{production}}/api/v2/laptop/1",
 					"host": [
