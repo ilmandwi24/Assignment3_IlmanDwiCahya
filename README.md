@@ -53,9 +53,9 @@ For this assigment, deployment web api crud : [https://crud-data-laptop.adaptabl
 
 ### Request MySQL
 
-`POST` `https://crud-data-laptop.adaptable.app/api/v1/laptop`
-
 `GET`  `https://crud-data-laptop.adaptable.app/api/v1/laptop`
+
+`POST` `https://crud-data-laptop.adaptable.app/api/v1/laptop`
 
 `PUT`  `https://crud-data-laptop.adaptable.app/api/v1/laptop/:id`
 
@@ -63,9 +63,9 @@ For this assigment, deployment web api crud : [https://crud-data-laptop.adaptabl
 
 ### Request Prisma ORM
 
-`POST` `https://crud-data-laptop.adaptable.app/api/v2/laptop`
-
 `GET`  `https://crud-data-laptop.adaptable.app/api/v2/laptop`
+
+`POST` `https://crud-data-laptop.adaptable.app/api/v2/laptop`
 
 `PUT`  `https://crud-data-laptop.adaptable.app/api/v2/laptop/:id`
 
