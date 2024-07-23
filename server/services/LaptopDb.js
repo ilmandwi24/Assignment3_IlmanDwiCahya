@@ -34,35 +34,6 @@ const executeQuery = async (query, values = []) => {
     throw error;
   }
 };
-// const getListPhonebook = async () => {
-//   let connection = null;
-//   try {
-//     const timeStart = process.hrtime();
-
-//     connection = connectionPool && (await connectionPool.getConnection());
-//     const [rawResult] = await connection.query(`SELECT * FROM ${phoneBookTable}`);
-//     const result = Object.values(JSON.parse(JSON.stringify(rawResult)));
-
-//     // Log Transaction
-//     const timeDiff = process.hrtime(timeStart);
-//     const timeTaken = Math.round((timeDiff[0] * 1e9 + timeDiff[1]) / 1e6);
-//     CommonHelper.log(['Database', 'getListPhonebook', 'INFO'], {
-//       message: { timeTaken },
-//       result
-//     });
-
-//     return result;
-//   } catch (error) {
-//     CommonHelper.log(['Database', 'getListPhonebook', 'ERROR'], {
-//       message: `${error}`
-//     });
-//     throw error;
-//   } finally {
-//     if (connection) {
-//       connection.release();
-//     }
-//   }
-// };
 const getListLaptop = async () => {
   const query = `SELECT * FROM ${laptopTable}`;
   const rawResult = await executeQuery(query);

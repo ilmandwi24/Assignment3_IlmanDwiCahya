@@ -8,7 +8,6 @@ const app = express();
 const port = process.env.PORT || 8080;
 
 // Import Route
-const anime = require('./server/api/anime');
 const laptop = require('./server/api/laptop');
 
 // Middleware
@@ -33,7 +32,6 @@ app.use((req, res, next) => {
 });
 
 // Route middlewares
-app.use('/api/v1/anime', anime);
 
 app.use('/api', laptop);
 

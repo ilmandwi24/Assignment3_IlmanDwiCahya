@@ -76,14 +76,14 @@ const getAllListV2 = async () => {
   try {
     const data = await LaptopPrisma.getListLaptop();
     if (data.length === 0) {
-      return Boom.notFound('Phonebook not found');
+      return Boom.notFound('Laptop not found');
     }
     return {
       count: data.length,
       list: data
     };
   } catch (error) {
-    CommonHelper.log(['PhoneBook Helper', 'getAllList', 'ERROR'], { message: `${error}` });
+    CommonHelper.log(['Laptop Helper', 'getAllList', 'ERROR'], { message: `${error}` });
     throw CommonHelper.errorResponse(error);
   }
 };
